@@ -20,8 +20,8 @@ Este proyecto es una plantilla base para desarrollar un servidor backend con **E
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/usuario/mi-proyecto.git
-cd mi-proyecto
+git clone https://github.com/Mondlua/Proyecto-Final-Node.git
+cd Proyecto-Final-Node
 ```
 
 ### 2. Instalar dependencias
