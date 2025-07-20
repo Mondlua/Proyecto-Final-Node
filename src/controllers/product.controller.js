@@ -12,24 +12,29 @@ const getProducts = async (req, res) => {
   }
 };
 
-
 const getProductById = async (req, res) => {
   const { id } = req.params;
   try {
-    if(!id) {
+    if (!id) {
       return res.status(400).json({ message: "El ID es requerido" });
     }
     const product = await productService.getProduct(id);
 
-    if(!product) return res.status(404).json({message:"Producto no encontrado"});
+    if (!product.exists())
+      return res.status(404).json({ message: "Producto no encontrado" });
 
-    res.status(200).json({ message: "Lista de productos", payload: { id: product.id, ...product.data() } });
+    res
+      .status(200)
+      .json({
+        message: "Lista de productos",
+        payload: { id: product.id, ...product.data() },
+      });
   } catch (error) {
     res
       .status(500)
       .json({ message: "error interno del servidor", error: error.message });
   }
-}
+};
 
 const createProduct = async (req, res) => {
   try {
@@ -41,8 +46,10 @@ const createProduct = async (req, res) => {
       disponible: disponible || false,
     };
 
-     await productService.createProduct(newProduct);
-    res.status(200).json({ message: "Lista de productos", payload: newProduct });
+    await productService.createProduct(newProduct);
+    res
+      .status(200)
+      .json({ message: "Lista de productos", payload: newProduct });
   } catch (error) {
     res
       .status(500)
@@ -50,15 +57,15 @@ const createProduct = async (req, res) => {
   }
 };
 
-
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
-    if(!id) {
+    if (!id) {
       return res.status(400).json({ message: "El ID es requerido" });
     }
     const product = await productService.getProduct(id);
-    if (!product.exists()) return res.status(404).json({ message: "Producto no encontrado" });
+    if (!product.exists())
+      return res.status(404).json({ message: "Producto no encontrado" });
 
     await productService.deleteProduct(id);
     res.status(200).json({ message: "Producto eliminado", payload: { id } });
@@ -67,6 +74,6 @@ const deleteProduct = async (req, res) => {
       .status(500)
       .json({ message: "error interno del servidor", error: error.message });
   }
-}
+};
 
 export default { getProducts, createProduct, getProductById, deleteProduct };

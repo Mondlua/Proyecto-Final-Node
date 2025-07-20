@@ -54,28 +54,28 @@ npm start
 src/
 ├── config/                 # Configuración de Firebase y entorno
 │   └── db.js
+│   └── envs.js
 │
 ├── controllers/           # Lógica que responde a las rutas
+│   └── auth.controller.js
 │   └── product.controller.js
-│   └── user.controller.js
 │
 ├── middlewares/           # Lógica de autenticación
 │   └── auth.middleware.js
 │
-├── services/              # Lógica de negocio reutilizable
-│   └── product.service.js
-│   └── user.service.js
-│
 ├── models/                # Acceso a Firestore y lógica de datos
 │   └── product.model.js
-│   └── user.model.js
 │
 ├── routes/                # Definición de rutas de la API
 │   └── auth.routes.js
 │   └── product.routes.js
 │
+├── services/              # Lógica de negocio reutilizable
+│   └── product.service.js
+│
 ├── utils/                 # Funciones auxiliares
 │   └── index.js
+│   └── jwt.js
 │
 ├── index.js               # Punto de entrada del servidor
 │
@@ -87,9 +87,10 @@ src/
 
 ## Endpoints disponibles
 
-| Método | Ruta                   | Descripción                          |
-|--------|------------------------|--------------------------------------|
-| GET    | `/api/products`        | Devuelve todos los productos         |
-| GET    | `/api/products/:id`    | Devuelve un producto por su ID       |
-| POST   | `/api/products/create` | Crea un nuevo producto               |
-| DELETE | `/api/products/:id`    | Elimina un producto por su ID        |
+| Método | Ruta                   | Descripción                    |
+| ------ | ---------------------- | ------------------------------ |
+| GET    | `/api/products`        | Devuelve todos los productos   |
+| GET    | `/api/products/:id`    | Devuelve un producto por su ID |
+| POST   | `/api/products/create` | Crea un nuevo producto         |
+| DELETE | `/api/products/:id`    | Elimina un producto por su ID  |
+| POST   | `/auth/login`          | Autentica un usuario           |

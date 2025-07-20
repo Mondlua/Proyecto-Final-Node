@@ -12,7 +12,6 @@ import {
 
 const productCollection = collection(db, "productos");
 
-
 //* Methods
 export const getAllProducts = async () => {
   try {
@@ -32,25 +31,22 @@ export const getProductById = async (id) => {
     return product;
   } catch (error) {
     throw new Error("Error", error.message);
-    
   }
-}
+};
 
 export const saveProduct = async (product) => {
   try {
     const newProduct = await addDoc(productCollection, product);
-    return newProduct
+    return newProduct;
   } catch (error) {
     throw new Error("Error", error.message);
   }
 };
 
-export const deleteProduct = async (id) => {
+export const deleteProductById = async (id) => {
   try {
     await deleteDoc(doc(productCollection, id));
   } catch (error) {
     throw new Error("Error", error.message);
-    
   }
-}
-
+};
